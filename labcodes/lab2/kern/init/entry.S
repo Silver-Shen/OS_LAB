@@ -7,7 +7,7 @@
 .globl kern_entry
 kern_entry:
     # reload temperate gdt (second time) to remap all physical memory
-    # virtual_addr 0~4G=linear_addr&physical_addr -KERNBASE~4G-KERNBASE 
+    # virtual_addr 0~4G=linear_addr&physical_addr -KERNBASE~4G-KERNBASE
     lgdt REALLOC(__gdtdesc)
     movl $KERNEL_DS, %eax
     movw %ax, %ds

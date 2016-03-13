@@ -133,7 +133,9 @@ gdt_init(void) {
     ltr(GD_TSS);
 }
 
-//init_pmm_manager - initialize a pmm_manager instance
+/*init_pmm_manager - initialize a pmm_manager instance
+ *@LAB2:The default_pmm_manager is assigned to pmm_manager(which is global)
+ */
 static void
 init_pmm_manager(void) {
     pmm_manager = &default_pmm_manager;
@@ -185,7 +187,10 @@ nr_free_pages(void) {
     return ret;
 }
 
-/* pmm_init - initialize the physical memory management */
+/*
+ * @LAB2: find the maximum physical address maxpa(<0x38000000,896M available)
+ * pmm_init - initialize the physical memory management
+ * */
 static void
 page_init(void) {
     struct e820map *memmap = (struct e820map *)(0x8000 + KERNBASE);
@@ -215,9 +220,9 @@ page_init(void) {
     for (i = 0; i < npage; i ++) {
         SetPageReserved(pages + i);
     }
-
+    //point the start address of available memory(note: physical address!)
     uintptr_t freemem = PADDR((uintptr_t)pages + sizeof(struct Page) * npage);
-
+    //collect all the free memory(aligned with pages)
     for (i = 0; i < memmap->nr_map; i ++) {
         uint64_t begin = memmap->map[i].addr, end = begin + memmap->map[i].size;
         if (memmap->map[i].type == E820_ARM) {

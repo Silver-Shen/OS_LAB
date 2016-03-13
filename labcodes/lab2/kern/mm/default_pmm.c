@@ -9,7 +9,7 @@
    usually split, and the remainder added to the list as another free block.
    Please see Page 196~198, Section 8.2 of Yan Wei Min's chinese book "Data Structure -- C programming language"
 */
-// LAB2 EXERCISE 1: YOUR CODE
+// LAB2 EXERCISE 1: 2013011371
 // you should rewrite functions: default_init,default_init_memmap,default_alloc_pages, default_free_pages.
 /*
  * Details of FFMA
@@ -59,6 +59,9 @@ free_area_t free_area;
 #define free_list (free_area.free_list)
 #define nr_free (free_area.nr_free)
 
+/*@LAB2:initialize the default_pmm_manager
+ *
+ */
 static void
 default_init(void) {
     list_init(&free_list);
@@ -259,7 +262,9 @@ default_check(void) {
     assert(count == 0);
     assert(total == 0);
 }
-
+/*@LAB2:default setting for global memory management,whose member function should be overwrite
+ *
+ */
 const struct pmm_manager default_pmm_manager = {
     .name = "default_pmm_manager",
     .init = default_init,

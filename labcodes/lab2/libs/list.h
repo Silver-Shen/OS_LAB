@@ -14,6 +14,9 @@
  * directly rather than using the generic single-entry routines.
  * */
 
+/*@LAB2:Pure double linked list node, do not contain data
+ *
+ */
 struct list_entry {
     struct list_entry *prev, *next;
 };
