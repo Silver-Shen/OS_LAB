@@ -15,7 +15,7 @@
 start:
 .code16                                             # Assemble for 16-bit mode
     cli                                             # Disable interrupts
-    cld                                             # String operations increment(DF=0, si auto ++)
+    cld                                             # String operations increment
 
     # Set up the important data segment registers (DS, ES, SS).
     xorw %ax, %ax                                   # Segment number zero

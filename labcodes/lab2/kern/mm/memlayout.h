@@ -82,9 +82,6 @@ typedef uintptr_t pde_t;
 #define E820_ARM            1       // address range memory
 #define E820_ARR            2       // address range reserved
 
-/*
- * @LAB2:for physical memory probe
- */
 struct e820map {
     int nr_map;
     struct {
@@ -121,9 +118,7 @@ struct Page {
 #define le2page(le, member)                 \
     to_struct((le), struct Page, member)
 
-/* free_area_t - maintains a doubly linked list to record free (unused) pages
- * @LAB2:used to initialize the default_pmm_manager
- * */
+/* free_area_t - maintains a doubly linked list to record free (unused) pages */
 typedef struct {
     list_entry_t free_list;         // the list header
     unsigned int nr_free;           // # of free pages in this free list
