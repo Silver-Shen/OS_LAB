@@ -22,4 +22,4 @@ disk0
 *.orig
 .idea/
 .settings/
-
+autodiff.sh
