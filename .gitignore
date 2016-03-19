@@ -23,3 +23,5 @@ disk0
 .idea/
 .settings/
 autodiff.sh
+*_original
+*.rej
