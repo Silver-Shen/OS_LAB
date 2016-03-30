@@ -49,7 +49,8 @@ kern_init(void) {
     //LAB1: CAHLLENGE 1 If you try to do it, uncomment lab1_switch_test()
     // user/kernel mode switch test
     //lab1_switch_test();
-    
+    cprintf("idleproc : name=%s, pid=%d\n", idleproc->name, idleproc->pid);
+    cprintf("initproc : name=%s, pid=%d\n", initproc->name, initproc->pid);
     cpu_idle();                 // run idle process
 }
 
