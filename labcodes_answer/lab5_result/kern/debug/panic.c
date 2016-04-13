@@ -23,7 +23,8 @@ __panic(const char *file, int line, const char *fmt, ...) {
     vcprintf(fmt, ap);
     cprintf("\n");
     va_end(ap);
-
+    //print stackframe
+        print_stackframe();
 panic_dead:
     intr_disable();
     while (1) {

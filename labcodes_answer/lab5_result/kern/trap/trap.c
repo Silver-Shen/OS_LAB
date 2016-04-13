@@ -288,6 +288,7 @@ trap(struct trapframe *tf) {
     
         current->tf = otf;
         if (!in_kernel) {
+        	panic("lovelive");
             if (current->flags & PF_EXITING) {
                 do_exit(-E_KILLED);
             }
