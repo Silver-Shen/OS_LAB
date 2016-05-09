@@ -38,10 +38,7 @@ cond_signal (condvar_t *cvp) {
    *       }
    */
      if(cvp->count>0) {
-        cvp->owner->next_count ++;
         up(&(cvp->sem));
-        down(&(cvp->owner->next));
-        cvp->owner->next_count --;
       }
    cprintf("cond_signal end: cvp %x, cvp->count %d, cvp->owner->next_count %d\n", cvp, cvp->count, cvp->owner->next_count);
 }
@@ -61,12 +58,10 @@ cond_wait (condvar_t *cvp) {
     *         wait(cv.sem);
     *         cv.count --;
     */
-      cvp->count++;
-      if(cvp->owner->next_count > 0)
-         up(&(cvp->owner->next));
-      else
-         up(&(cvp->owner->mutex));
-      down(&(cvp->sem));
-      cvp->count --;
+    cvp->count++;
+    up(&(cvp->owner->mutex));
+    down(&(cvp->sem));
+    down(&(cvp->owner->mutex));
+    cvp->count --;
     cprintf("cond_wait end:  cvp %x, cvp->count %d, cvp->owner->next_count %d\n", cvp, cvp->count, cvp->owner->next_count);
 }
