@@ -30,7 +30,7 @@ sched_class_pick_next(void) {
     return sched_class->pick_next(rq);
 }
 
-static void
+extern void
 sched_class_proc_tick(struct proc_struct *proc) {
     if (proc != idleproc) {
         sched_class->proc_tick(rq, proc);
@@ -82,11 +82,13 @@ schedule(void) {
     local_intr_save(intr_flag);
     {
         current->need_resched = 0;
+        //cprintf("time up: %s %d\n", current->name, current->pid);
         if (current->state == PROC_RUNNABLE) {
             sched_class_enqueue(current);
         }
         if ((next = sched_class_pick_next()) != NULL) {
             sched_class_dequeue(next);
+            //cprintf("next proc: %s %d\n", next->name, next->pid);
         }
         if (next == NULL) {
             next = idleproc;
